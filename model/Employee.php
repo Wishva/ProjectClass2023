@@ -1,6 +1,4 @@
 <?php
-
-
 class Employee{
     private $empFirstName;
     private $empLastName;
@@ -23,7 +21,3 @@ class Employee{
         echo 789;
     }
 }
-
-$obj = new Employee("kamal");
-
-$obj->save("kamal");

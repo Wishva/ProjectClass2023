@@ -35,45 +35,45 @@
                     <div class="col-sm-12 col-xl-12">
                         <div class="bg-secondary rounded h-100 p-4">
                             <h6 class="mb-4 text-center">Employee Registration</h6>
-                            <form>
+                            <form id="empRegistrationForm">
                                 <div class="mb-3">
                                     <label for="empFirstName" class="form-label">First Name</label>
-                                    <input type="email" class="form-control" id="empFirstName"
+                                    <input type="text" class="form-control" id="empFirstName"
                                         aria-describedby="emailHelp">
-                                    <div id="emailHelp" class="form-text">
+                                    <div id="empFirstNameHelp" class="form-text errorText">
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="empLastName" class="form-label">Last Name</label>
-                                    <input type="email" class="form-control" id="empLastName"
+                                    <input type="text" class="form-control" id="empLastName"
                                         aria-describedby="emailHelp">
-                                    <div id="emailHelp" class="form-text"></div>
+                                    <div id="empLastNameHelp" class="form-text errorText"></div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="empNIC" class="form-label">NIC</label>
-                                    <input type="email" class="form-control" id="empNIC"
-                                        aria-describedby="emailHelp">
-                                    <div id="emailHelp" class="form-text">
+                                    <input type="text" class="form-control" id="empNIC"
+                                        aria-describedby="empNICHelp">
+                                    <div id="empNICHelp" class="form-text errorText">
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="empPhone" class="form-label">Contact No:</label>
-                                    <input type="email" class="form-control" id="empPhone"
+                                    <input type="text" class="form-control" id="empPhone"
                                         aria-describedby="emailHelp">
-                                    <div id="emailHelp" class="form-text">
+                                    <div id="empPhoneHelp" class="form-text errorText">
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="empEmail" class="form-label">Email</label>
                                     <input type="email" class="form-control" id="empEmail"
                                         aria-describedby="emailHelp">
-                                    <div id="emailHelp" class="form-text"></div>
+                                    <div id="empEmailHelp" class="form-text errorText"></div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="empAddress" class="form-label">Address</label>
                                     <textarea class="form-control" id="empAddress"
                                         aria-describedby="emailHelp"></textarea>
-                                    <div id="emailHelp" class="form-text">
+                                    <div id="empAddressHelp" class="form-text errorText">
                                     </div>
                                 </div>
                                 <div class="mb-4">
@@ -87,14 +87,16 @@
                                 </select>
                                 </div>
                                
-                                <button type="submit" class="btn btn-success">Register</button>
-                                <button type="submit" class="btn btn-primary">Cancel</button>
+                                <button type="submit" class="btn btn-success" id="testButton">Register</button>
+                                <button type="reset" class="btn btn-primary">Cancel</button>
                             </form>
                         </div>
                     </div>
                     
                 </div>
             </div>
+
+            <script></script>
             <!-- Form End -->
 
 

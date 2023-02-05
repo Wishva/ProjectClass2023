@@ -29,4 +29,7 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <!-- Custom Stylesheet -->
+    <link href="css/custom.css" rel="stylesheet">
 </head>
