@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     //-------------------------------------------------Employee Registration-------------------------------------------
 
     //refer the form fields 
@@ -9,10 +8,44 @@ $(document).ready(function () {
     let empPhoneField = $("#empPhone");
     let empEmailField = $("#empEmail");
     let empAddressField = $("#empAddress");
+    let empRoleInfo = $("#empRole");
+
+    //error fields 
+    let empFnameErrorField = $("#empFirstNameHelp");
+    let empLnameErrorField = $("#empLastNameHelp");
+    let empNICErrorField = $("#empNICHelp");
+    let empPhoneErrorField = $("#empPhoneHelp");
+    let empEmailErrorField = $("#empEmailHelp");
+    let empAddressErrorField = $("#empAddressHelp");
+
+    //fetch the employee role
+    function getEmpRoleInfo()
+    {
+        let viewSup = 1;
+        empRoleInfo.empty();
+        empRoleInfo.append("<option>Loading......</option>");
+        $.ajax({
+            type: "POST",
+            data:{viewSup},
+            url: "../../controller/EmpRoleController.php",
+            dataType: "json",
+            success: function (data) {
+                empRoleInfo.empty();
+                empRoleInfo.append("<option value='0'> -- Select Suitable Role --");
+                $.each(data, function (i) {
+                    empRoleInfo.append('<option value="' + data[i].roleId + '">' + data[i].roleName +'</option>');
+                });
+            },
+            complete: function () {
+            }
+        });
+
+    }
+    getEmpRoleInfo();
    
     $("#empRegistrationForm").submit(function (event) {
 
-        //prevent default events happen when submitting the document 
+        //prevent default events when submitting the document 
         event.preventDefault();
 
         //get the fields values 
@@ -22,21 +55,13 @@ $(document).ready(function () {
         let empPhone = empPhoneField.val();
         let empEmail = empEmailField.val();
         let empAddress = empAddressField.val();
-
-        //error fields 
-        let empFnameErrorField = $("#empFirstNameHelp");
-        let empLnameErrorField = $("#empLastNameHelp");
-        let empNICErrorField = $("#empNICHelp");
-        let empPhoneErrorField = $("#empPhoneHelp");
-        let empEmailErrorField = $("#empEmailHelp");
-        let empAddressErrorField = $("#empAddressHelp");
+        let empRole =  empRoleInfo.val();
 
         $.ajax({
             type: "POST",
             url: "../../controller/EmpDataValidator.php",
-            data: {checkEmpRegFlag:1, empFname:empFname, empLname:empLname, empNIC:empNIC, empPhone:empPhone, empEmail:empEmail, empAddress:empAddress},
+            data: {checkEmpRegFlag:1, empFname:empFname, empLname:empLname, empNIC:empNIC, empPhone:empPhone, empEmail:empEmail, empAddress:empAddress, empRole:empRole},
             success: function (response) {
-                console.log(response);
                 if(response.includes("invalid first name")){
                     empFnameErrorField.html("Invalid first name");
                     empFnameField.addClass("errorField");
@@ -61,12 +86,89 @@ $(document).ready(function () {
                     empAddressErrorField.html("Invalid Address");
                     empAddressField.addClass("errorField");
                 }
+                if(response.includes("invalid Role")){
+                    empRoleInfo.addClass("errorField");
+                }
+                if(response.includes("successfully added")){
+                    $.confirm({
+                        title: 'Employee Registered!',
+                        content: 'The new password will be the NIC',
+                        type: 'green',
+                        typeAnimated: true,
+                        buttons: {
+                            close: function () {
+                            }
+                        }
+                    });
+                }
+                if(response.includes("technicalError")){
+                    $.confirm({
+                        title: 'Technical error occurred',
+                        content: 'Please contact the technical team',
+                        type: 'red',
+                        typeAnimated: true,
+                        buttons: {
+                            close: function () {
+                            }
+                        }
+                    });
+                }
             }           
         });
 
-
     });
 
+    //function for remove errors or add errors click submit
+    function addRemoveErrors(inputField,errorField)
+    {
+        inputField.keypress(function () {
+            inputField.removeClass("errorField");
+                    errorField.removeClass("errorText").html("");
+        });
 
+        inputField.keypress(function () {
+            inputField.keyup(function () {
+                if (inputField.val()) {
+                    inputField.removeClass("errorField");
+                    errorField.removeClass("errorText").html("");
+                    inputField.css("border-color","");
+                } else {
+                    inputField.addClass("errorField");
+                    errorField.addClass("errorText").html("Please fill this field");
+                }
+            });
+        });
+    }
+
+    addRemoveErrors(empFnameField, empFnameErrorField);
+    addRemoveErrors(empLnameField, empLnameErrorField);
+    addRemoveErrors(empNICField, empNICErrorField);
+    addRemoveErrors(empPhoneField, empPhoneErrorField);
+    addRemoveErrors(empEmailField, empEmailErrorField);
+    addRemoveErrors(empAddressField, empAddressErrorField);
+
+    //remove errors of the emp role field
+    empRoleInfo.change(function (e) { 
+       if($(this).val() > 0){
+            $(this).removeClass("errorField");
+       }
+    });
+
+    //clear button
+    $("#empRegClearButton").click(function () {
+        empFnameField.removeClass("errorField");
+        empFnameErrorField.removeClass("errorText").html("");
+        empLnameField.removeClass("errorField");
+        empLnameErrorField.removeClass("errorText").html("");
+        empNICField.removeClass("errorField");
+        empNICErrorField.removeClass("errorText").html("");
+        empPhoneField.removeClass("errorField");
+        empPhoneErrorField.removeClass("errorText").html("");
+        empEmailField.removeClass("errorField");
+        empEmailErrorField.removeClass("errorText").html("");
+        empAddressField.removeClass("errorField");
+        empAddressErrorField.removeClass("errorText").html("");
+        empRoleInfo.removeClass("errorField");
+    });
 
 });

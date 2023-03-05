@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="empEmail" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="empEmail"
+                                    <input type="text" class="form-control" id="empEmail"
                                         aria-describedby="emailHelp">
                                     <div id="empEmailHelp" class="form-text errorText"></div>
                                 </div>
@@ -80,15 +80,11 @@
                                 <label for="empRole">Position</label>
                                 <select class="form-select" id="empRole"
                                     aria-label="Floating label select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
                                 </select>
                                 </div>
                                
-                                <button type="submit" class="btn btn-success" id="testButton">Register</button>
-                                <button type="reset" class="btn btn-primary">Cancel</button>
+                                <button type="submit" class="btn btn-success" id="empRegButton">Register</button>
+                                <button type="reset" class="btn btn-primary" id="empRegClearButton">Clear</button>
                             </form>
                         </div>
                     </div>

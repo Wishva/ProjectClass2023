@@ -23,6 +23,7 @@
 
     <!-- JavaScript Libraries -->
     <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/jquery-confirm.js"></script>
     <script src="js/functions.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/chart/chart.min.js"></script>

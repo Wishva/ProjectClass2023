@@ -32,4 +32,7 @@
 
     <!-- Custom Stylesheet -->
     <link href="css/custom.css" rel="stylesheet">
+
+    <!-- confirm windows -->
+    <link href="css/jquery-confirm.css" rel="stylesheet">
 </head>
