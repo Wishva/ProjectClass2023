@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2023 at 12:21 PM
+-- Generation Time: Apr 02, 2023 at 10:21 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -33,7 +33,6 @@ CREATE TABLE `employee` (
   `EmpLastName` varchar(50) NOT NULL,
   `EmpNIC` varchar(50) NOT NULL,
   `EmpPhone` int(20) NOT NULL,
-  `EmpEmail` varchar(30) NOT NULL,
   `EmpAddress` varchar(50) NOT NULL,
   `UserId` int(50) NOT NULL,
   `RoleId` int(20) NOT NULL,
@@ -44,8 +43,8 @@ CREATE TABLE `employee` (
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`EmpId`, `EmpFirstName`, `EmpLastName`, `EmpNIC`, `EmpPhone`, `EmpEmail`, `EmpAddress`, `UserId`, `RoleId`, `EmpInsertDate`) VALUES
-(1, 'kamal', 'kamal', '921862776V', 777777777, '', 'No4, ABC road, Kandy', 4, 2, '2023-03-05 16:05:05');
+INSERT INTO `employee` (`EmpId`, `EmpFirstName`, `EmpLastName`, `EmpNIC`, `EmpPhone`, `EmpAddress`, `UserId`, `RoleId`, `EmpInsertDate`) VALUES
+(1, 'kamal', 'kamal', '921862776V', 777777777, 'no 5 , kandy', 1, 1, '2023-03-12 13:19:57');
 
 -- --------------------------------------------------------
 
@@ -76,7 +75,7 @@ INSERT INTO `emprole` (`RoleId`, `RoleName`, `RoleInsertDate`) VALUES
 CREATE TABLE `user` (
   `UserId` int(50) NOT NULL,
   `UserEmail` varchar(50) NOT NULL,
-  `UserPassword` varchar(50) NOT NULL,
+  `UserPassword` varchar(300) NOT NULL,
   `UserType` int(20) NOT NULL,
   `UserStatus` enum('true','false') NOT NULL,
   `UserInsertDate` datetime NOT NULL DEFAULT current_timestamp()
@@ -87,10 +86,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`UserId`, `UserEmail`, `UserPassword`, `UserType`, `UserStatus`, `UserInsertDate`) VALUES
-(1, 'kamal@gmail.com', '$2y$10$Qa5zbAEqYgwL8BB2Hm1FGeB6uZZQkKQWJnStlYzJ4ua', 1, 'true', '2023-03-05 16:00:56'),
-(2, 'kamal@gmail.com', '$2y$10$uO4Wgc1pCpGOOLXa/dR9ce7xkWwuQyT.E4H/cPC1Egm', 1, 'true', '2023-03-05 16:02:24'),
-(3, 'kamal@gmail.com', '$2y$10$GT844I.1YgebiqAdjJR/du2FRoT39rSzcF4xQF1CeZZ', 1, 'true', '2023-03-05 16:03:09'),
-(4, 'kamal@gmail.com', '$2y$10$wdcJHj9z2Zk.0BNvy6ZwdesojXYd/scZgTM6xCSynlS', 1, 'true', '2023-03-05 16:05:05');
+(1, 'kamal@gmail.com', '$2y$10$WvsksCcPbEJulh0Ind74Oe.RmupRY3jzQDY.4y6z2jiWr3b507mY.', 1, 'true', '2023-03-12 13:19:57');
 
 --
 -- Indexes for dumped tables
@@ -136,7 +132,7 @@ ALTER TABLE `emprole`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `UserId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
