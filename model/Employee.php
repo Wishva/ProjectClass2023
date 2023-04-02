@@ -29,13 +29,12 @@ class Employee extends User{
         $this->userId = $this->dbCon->real_escape_string($userId);
         $this->roleId = $this->dbCon->real_escape_string($empRole);
 
-        $sqlQuery = "INSERT INTO `employee`(`EmpFirstName`, `EmpLastName`, `EmpNIC`, `EmpPhone`, `EmpEmail`, `EmpAddress`, `UserId`, `RoleId`) VALUES 
+        $sqlQuery = "INSERT INTO `employee`(`EmpFirstName`, `EmpLastName`, `EmpNIC`, `EmpPhone`, `EmpAddress`, `UserId`, `RoleId`) VALUES 
                     (
                      '" . $this->empFirstName . "',
                      '" . $this->empLastName . "',
                      '" . $this->empNIC . "',
                      '" . $this->empPhone . "',
-                     '" . $this->empEmail . "',
                      '" . $this->empAddress . "',
                      '" . $this->userId . "',
                      '" . $this->roleId . "'
@@ -49,7 +48,7 @@ class Employee extends User{
         }
     }
 
-    // function for get supplier details
+    // function for get employee role details
 
     public function getEmpRole()
     {
@@ -70,10 +69,29 @@ class Employee extends User{
         }
     }
 
+    //function to get employee role using user id 
+
+    public function getEmpRoleUserId($userId)
+    {
+        $sqlQuery = "SELECT RoleId FROM `employee` WHERE UserId = '".$userId."';";
+        $executeQuery = $this->dbCon->query($sqlQuery);
+        $numRows = $executeQuery->num_rows;
+        if ($numRows > 0) {
+            $result = $executeQuery->fetch_assoc();
+            return $result['RoleId'];
+        } else {
+            return false;
+        }
+    }
+
+
+
     public function __destruct()
     {
         //TODO add the code to close the connection
     }
 }
 
+$obj = new Employee();
 
+print_r($obj->getEmpRoleUserId(1));

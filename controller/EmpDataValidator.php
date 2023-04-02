@@ -12,7 +12,7 @@ if (isset($_POST['checkEmpRegFlag'])) {
         $empLname = htmlentities($_POST['empLname'], ENT_QUOTES);
         $empNIC = htmlentities($_POST['empNIC'], ENT_QUOTES);
         $empPhone = htmlentities($_POST['empPhone'], ENT_QUOTES);
-        $empEmail = htmlentities($_POST['empEmail'], ENT_QUOTES);
+        $empEmail = strtolower(htmlentities($_POST['empEmail'], ENT_QUOTES));
         $empAddress = htmlentities($_POST['empAddress'], ENT_QUOTES);
         $empRole = (int)htmlentities($_POST['empRole'], ENT_QUOTES);
         $flag = true;

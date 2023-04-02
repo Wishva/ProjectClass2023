@@ -46,6 +46,22 @@ class User {
         }
     }
 
-}
+    //get user login info
+    public function geUserLoginInfo($userEmail)
+    {
+        $sqlQuery = "SELECT `UserId`, `UserPassword` FROM `user` WHERE `UserEmail` = '". $userEmail ."';";
+        $executeQuery = $this->dbCon->query($sqlQuery);
+        $numRows = $executeQuery->num_rows;
+        if ($numRows > 0) {
+            $queryResult = $executeQuery->fetch_assoc();
+            $userData = [];
+            $userData['UserId'] = $queryResult['UserId'];
+            $userData['UserPassword'] = $queryResult['UserPassword'];
+            return $userData;
+        } else {
+            return false;
+        }
+    }
 
+}
 

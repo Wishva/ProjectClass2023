@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     //-------------------------------------------------Employee Registration-------------------------------------------
 
     //refer the form fields 
@@ -123,7 +124,7 @@ $(document).ready(function () {
     {
         inputField.keypress(function () {
             inputField.removeClass("errorField");
-                    errorField.removeClass("errorText").html("");
+            errorField.removeClass("errorText").html("");
         });
 
         inputField.keypress(function () {
@@ -155,7 +156,7 @@ $(document).ready(function () {
     });
 
     //clear button
-    $("#empRegClearButton").click(function () {
+    $("#empRegClearButton").on("click", function () {
         empFnameField.removeClass("errorField");
         empFnameErrorField.removeClass("errorText").html("");
         empLnameField.removeClass("errorField");
@@ -171,4 +172,67 @@ $(document).ready(function () {
         empRoleInfo.removeClass("errorField");
     });
 
+    //-------------------------------------------------Employee Login-------------------------------------------
+
+    let empLoginButton = $("#empLoginButton");
+
+    let empLoginEmail = $("#empLoginEmail");
+    let empLoginPassword = $("#empLoginPassword");
+
+    empLoginButton.on("click",  function () { 
+        let empLoginEmailVal = empLoginEmail.val();
+        let empLoginPasswordVal = empLoginPassword.val();
+        $.ajax({
+            type: "POST",
+            data:{empLoginCheck:1, empLoginEmailVal:empLoginEmailVal, empLoginPasswordVal:empLoginPasswordVal},
+            url: "../../controller/EmpLoginController.php",
+            success: function (response) {
+                if(response.includes("wrongPassword")){
+                    $.confirm({
+                        title: 'Oops!',
+                        content: 'Please check the password again',
+                        type: 'red',
+                        typeAnimated: true,
+                        buttons: {
+                            close: function () {
+                            }
+                        }
+                    });
+                }
+                if(response.includes("wrongEmail")){
+                    $.confirm({
+                        title: 'Oops!',
+                        content: 'Please check the email again',
+                        type: 'red',
+                        typeAnimated: true,
+                        buttons: {
+                            close: function () {
+                            }
+                        }
+                    });
+                }
+                if(response.includes("systemError")){
+                    $.confirm({
+                        title: 'Technical error occurred ',
+                        content: 'Please contact the developer',
+                        type: 'red',
+                        typeAnimated: true,
+                        buttons: {
+                            close: function () {
+                            }
+                        }
+                    });
+                }
+                if(response.includes("admin")){
+                    window.location.href = 'admin.php';
+                }
+                if(response.includes("manager")){
+                    window.location.href = 'manager.php';
+                }
+            }
+        });
+
+     });
+
 });
+
